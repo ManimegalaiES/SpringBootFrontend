@@ -1,25 +1,31 @@
 import { useState } from "react";
 import axios from "axios";
+import "./Login.css"; 
 
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  async function handleLogin(event){
+
+  async function handleLogin(event) {
     event.preventDefault();
-    try{
-        const token = await axios.post("http://localhost:3001/api/auth/login",{userName,password})
-        console.log(token);
-        alert("Login Successful")
-    } catch (e){
-        console.log("Login Error", e);
-        alert("Invalid Cred")
+    try {
+      const token = await axios.post("http://localhost:3001/api/auth/login", {
+        userName,
+        password,
+      });
+      console.log(token);
+      alert("Login Successful");
+    } catch (e) {
+      console.log("Login Error", e);
+      alert("Invalid Cred");
     }
     console.log("Form Submitted");
   }
+
   return (
-    <div>
-      <h2>Login</h2>
-      <div>
+    <div className="login-container">
+      <div className="login-box">
+        <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <label htmlFor="userName">User Name</label>
           <input
@@ -29,7 +35,7 @@ const Login = () => {
             type="text"
             onChange={(e) => setUserName(e.target.value)}
           />
-          <br /> <br />
+
           <label htmlFor="password">Password</label>
           <input
             id="password"
@@ -38,12 +44,12 @@ const Login = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <br />
-          <br />
+
           <button type="submit">Login</button>
         </form>
       </div>
     </div>
   );
 };
+
 export default Login;
