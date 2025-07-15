@@ -9,7 +9,7 @@ const Login = () => {
   async function handleLogin(event) {
     event.preventDefault();
     try {
-      const token = await axios.post("http://localhost:3001/api/auth/login", {
+      const token = await axios.post("https://employee-restapi-day2-3.onrender.com/api/auth/login", {
         userName,
         password,
       });
