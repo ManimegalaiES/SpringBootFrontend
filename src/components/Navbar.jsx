@@ -1,15 +1,19 @@
-// src/components/Navbar.jsx
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ role, onLogout }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); 
+    onLogout(); 
+    navigate("/"); 
+  };
+
   return (
-    <nav className="navbar">
-      <div className="nav-left">Employee Management System</div>
-      <div className="nav-right">
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/">Logout</Link>
-      </div>
+    <nav style={{ padding: "10px", backgroundColor: "#f0f0f0" }}>
+      <Link to="/" style={{ marginRight: "10px" }}>Home</Link>
+      {role === "admin" && <Link to="/add">Add Employee</Link>}
+      <button onClick={handleLogout} style={{ float: "right" }}>Logout</button>
     </nav>
   );
 };
